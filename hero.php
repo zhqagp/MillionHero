@@ -8,7 +8,7 @@ $src_croped = './crop_1.png';
 // system("adb shell screencap -p > screenshot.png");
 
 require_once './aip-php-sdk-2.1.0/AipOcr.php';
-
+require './vendor/autoload.php';
 // 你的 APPID AK SK
 const APP_ID = '10678269';
 const API_KEY = 'mOuIRvYN69Ok1GhKAHAlhEzy';
@@ -58,18 +58,19 @@ foreach ($titles as $k => $v) {
 
 // print(ans)       #打印问题
 
-echo $ans,PHP_EOL,PHP_EOL,;
+echo $ans,PHP_EOL,PHP_EOL;
 // var_export($titles);
 
 // var_dump($ans);
 
+system('open -a "/Applications/Google Chrome.app" http://www.baidu.com/s?wd='.urlencode($ans));
 
-$document = new Document('http://www.baidu.com/s?wd='.$ans, true);
+$document = new Document('http://www.baidu.com/s?wd='.urlencode($ans), true);
 
-$posts = $document->find('.post');
+$posts = $document->find('.result');
 
 foreach($posts as $post) {
-    echo $post->text(), "\n";
+    echo $post->text(), PHP_EOL,PHP_EOL;
 }
 
 

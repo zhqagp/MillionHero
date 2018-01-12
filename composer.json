@@ -1,2 +1,25 @@
 {
+	"name": "MillionHero",
+    "description": "MillionHero",
+    "type": "project",
+    "keywords": [
+        "MillionHero",
+    ],
+    "homepage": "https://github.com/zhqagp/MillionHero",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "zhqagp",
+            "email": "zhqagp@qq.com"
+        }
+    ],
+	"require": {
+        "imangazaliev/didom": "^1.13"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
 }
