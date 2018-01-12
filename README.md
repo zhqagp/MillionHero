@@ -3,7 +3,7 @@
 
 ## 我的使用环境是Mac Pro+PHP7.1
 
-本项目参考 https://github.com/wuditken/MillionHeroes， 使用adb截图。
+本项目参考 https://github.com/wuditken/MillionHeroes， 使用adb截图，并优化了截图速度。
 
 ## 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（可以同时打开浏览器）
 
