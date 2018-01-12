@@ -5,7 +5,7 @@ $start = time();
 $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 
-// system("adb shell screencap -p > screenshot.png");
+system("adb shell screencap -p > screenshot.png");
 
 require_once './aip-php-sdk-2.1.0/AipOcr.php';
 require './vendor/autoload.php';
