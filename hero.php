@@ -23,7 +23,7 @@ $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
 
-system("adb shell screencap -p > screenshot.png");
+// system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
@@ -132,13 +132,12 @@ $posts = $document->find('.result');
 $result = array_merge($result,array_slice($posts,0,3));
 foreach(array_slice($result,0,3) as $post) {
 	$o = [];
-	$o[' '] = '';
 	$select_str = implode('',$select);
 	$select_arr = ch2arr($select_str);
 	foreach ($select_arr as $k => $v) {
 		$o[$v] = red($v);
 	}
-	$text = strtr($post->text(), $o);
+	$text = str_replace($select_arr,$o,$post->text());
     echo $text,PHP_EOL,PHP_EOL;
 }
 
