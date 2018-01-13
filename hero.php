@@ -22,8 +22,8 @@ $client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
 $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
-
-system("adb shell screencap -p > screenshot.png");
+$src_img = './screenshot_8.png';
+// system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
@@ -131,11 +131,11 @@ $result = array_slice($posts,0,3);
 $posts = $document->find('.result');
 $result = array_merge($result,array_slice($posts,0,3));
 foreach(array_slice($result,0,3) as $post) {
-	$o = [];
+	$c = $o = [];
 	$select_str = implode('',$select);
 	$select_arr = ch2arr($select_str);
 	foreach ($select_arr as $k => $v) {
-		$o[$v] = red($v);
+		$o[] = red($v);
 	}
 	$text = str_replace($select_arr,$o,$post->text());
     echo $text,PHP_EOL,PHP_EOL;
