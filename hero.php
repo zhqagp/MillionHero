@@ -19,7 +19,7 @@ $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
 
-// system("adb shell screencap -p > screenshot.png");
+system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
