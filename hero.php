@@ -3,8 +3,6 @@ use DiDom\Document;
 
 system("clear");
 
-
-
 $start = microtime(TRUE);
 require_once './vendor/autoload.php';
 require_once './aip-php-sdk-2.1.0/AipOcr.php';
@@ -22,8 +20,8 @@ $client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
 $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
-$src_img = './screenshot_8.png';
-// system("adb shell screencap -p > screenshot.png");
+
+system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
