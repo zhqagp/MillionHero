@@ -34,3 +34,6 @@ Mac 可以使用 brew cask install android-platform-tools
 	百度ocr：http://ai.baidu.com/tech/ocr/general
 
 3.连接手机，打开开发者调试模式<br>运行php hero.php {答题APP简称} （百万英雄为bw，冲顶大会为cd，芝士超人为zs）
+
+
+![](hero_demo.png)
