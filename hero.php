@@ -1,7 +1,7 @@
 <?php
 use DiDom\Document;
 
-$start = time();
+$start = microtime(TRUE);
 $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 
@@ -21,7 +21,7 @@ $img_size = getimagesize($src_img);
 $w = $img_size[0];
 $h = $img_size[1];
 
-echo "xx:(".$w.",".$h.")";
+echo "图片宽高:(".$w.",".$h.")",PHP_EOL;
 
 // 剪裁
 $source = imagecreatefrompng($src_img);
@@ -50,6 +50,8 @@ foreach ($titles as $k => $v) {
 	}
 }
 
+$ans = preg_replace('/^[1-9]\\d*\\./u', '', $ans);
+
 // tissue = ans[1:2]
 // if str.isdigit(tissue):            #去掉题目索引
 //      ans = ans[3:]
@@ -63,22 +65,19 @@ echo $ans,PHP_EOL,PHP_EOL;
 
 // var_dump($ans);
 
-system('open -a "/Applications/Google Chrome.app" http://www.baidu.com/s?wd='.urlencode($ans));
+// system('open -a "/Applications/Google Chrome.app" http://www.baidu.com/s?wd='.urlencode($ans));
 
 $document = new Document('http://www.baidu.com/s?wd='.urlencode($ans), true);
 
 $posts = $document->find('.result');
 
-foreach($posts as $post) {
+foreach(array_slice($posts, 0,3) as $post) {
     echo $post->text(), PHP_EOL,PHP_EOL;
 }
 
 
-$end = time();
+$end = microtime(TRUE);
 echo '程序用时：'.($end-$start).'秒';
-
-
-
 
 
 
