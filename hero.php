@@ -1,6 +1,10 @@
 <?php
 use DiDom\Document;
+
 system("clear");
+
+
+
 $start = microtime(TRUE);
 require_once './vendor/autoload.php';
 require_once './aip-php-sdk-2.1.0/AipOcr.php';
@@ -19,7 +23,7 @@ $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
 
-system("adb shell screencap -p > screenshot.png");
+// system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
@@ -43,7 +47,7 @@ if($type=='cd'){
 	imagecopy($croped, $source, 0, 0, 50,300, $w-100,680);
 }else if($type=='zs'){
 	// 芝士超人
-	imagecopy($croped, $source, 0, 0, 70,300, $w-100,900);
+	imagecopy($croped, $source, 0, 0, 50,300, $w-100,800);
 }else{
 	// 百万英雄  $type=='bw'
 	imagecopy($croped, $source, 0, 0, 70,300, $w-100,900);
@@ -127,8 +131,15 @@ $result = array_slice($posts,0,3);
 $posts = $document->find('.result');
 $result = array_merge($result,array_slice($posts,0,3));
 foreach(array_slice($result,0,3) as $post) {
-	echo strtr(trim($post->text(),"\n"), array(' '=>''));
-    echo PHP_EOL,PHP_EOL;
+	$o = [];
+	$o[' '] = '';
+	$select_str = implode('',$select);
+	$select_arr = ch2arr($select_str);
+	foreach ($select_arr as $k => $v) {
+		$o[$v] = red($v);
+	}
+	$text = strtr($post->text(), $o);
+    echo $text,PHP_EOL,PHP_EOL;
 }
 
 
@@ -182,5 +193,19 @@ function get_count($text)
 	$text = str_replace(',', '', $text);
 	$count = trim($text,'搜索工具百度为您找到相关结果约,个');
 	return $count;
+}
+
+function red($str)
+{
+	return "\033[31m".$str."\033[0m";
+}
+
+function ch2arr($str)
+{
+    $length = mb_strlen($str, 'utf-8');
+    $array = [];
+    for ($i=0; $i<$length; $i++)
+        $array[] = mb_substr($str, $i, 1, 'utf-8');
+    return $array;
 }
 
