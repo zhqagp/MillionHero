@@ -3,7 +3,7 @@
 
 ## 我的使用环境是Mac Pro+PHP7.1
 
-本项目参考 https://github.com/wuditken/MillionHeroes， 使用adb截图，并优化了截图速度。
+本项目参考 https://github.com/wuditken/MillionHeroes ，使用adb截图，通过百度OCR识别接口返回具体问题内容，然后通过百度接口获取前三个结果。
 
 ## 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（可以同时打开浏览器）
 
