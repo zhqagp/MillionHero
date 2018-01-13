@@ -28,6 +28,7 @@
 
 1.安装ADB 驱动，可以到[这里下载](https://adb.clockworkmod.com/)<br />
 	安装 ADB 后，请在环境变量里将 adb 的安装路径保存到 PATH 变量里，确保 adb 命令可以被识别到
+Mac 可以使用 brew cask install android-platform-tools
 
 2.在hero.php里填写自己百度ocr的APP_ID/API_KEY/SECRET_KEY</br>
 	百度ocr：http://ai.baidu.com/tech/ocr/general
