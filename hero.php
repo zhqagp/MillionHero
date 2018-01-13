@@ -1,6 +1,6 @@
 <?php
 use DiDom\Document;
-system("clear");
+// system("clear");
 $start = microtime(TRUE);
 require_once './vendor/autoload.php';
 require_once './aip-php-sdk-2.1.0/AipOcr.php';
