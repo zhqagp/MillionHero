@@ -27,8 +27,11 @@ if(DEV){
 	$middle = microtime(TRUE);
 	echo '截图用时：'.($middle-$start).'秒',PHP_EOL;
 }
-
-$img_size = getimagesize($src_img);
+if(filesize($src_img)>0){
+	$img_size = getimagesize($src_img);
+}else{
+	echo red('请以开发者模式连接电脑'),PHP_EOL;die;
+}
 
 $w = $img_size[0];
 $h = $img_size[1];
