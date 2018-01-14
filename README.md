@@ -28,7 +28,7 @@ brew cask install android-platform-tools
 
 ![](hero_demo.png)
 
-## 我的使用环境是Mac Pro+PHP7.1 （该脚本只支持安卓手机，适配1080*1920机型（其他机型未测试，欢迎提交issue））
+## 我的使用环境是Mac Pro+PHP7.1 （该脚本只支持安卓手机，适配1080*1920机型，其他机型未测试，欢迎提交issue）
 
 本项目参考 https://github.com/wuditken/MillionHeroes ，优化了截图速度，大概提高0.6秒，原理是通过adb截图，通过百度OCR识别接口返回具体问题和答案内容，然后通过百度接口获取前三个结果，仅供参考。
 
