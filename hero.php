@@ -23,7 +23,7 @@ $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
 
 // 截图并保存到本地，此方法速度最快
-// system("adb shell screencap -p > screenshot.png");
+system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
