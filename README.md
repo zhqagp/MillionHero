@@ -46,6 +46,5 @@ brew cask install android-platform-tools
 
 该公式的依据来自于维基百科: https://en.wikipedia.org/wiki/Pointwise_mutual_information
 
-## 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（可以同时打开浏览器,代码已经注释）
 
 

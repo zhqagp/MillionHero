@@ -13,6 +13,7 @@ const API_KEY = 'mOuIRvYN69Ok1GhKAHAlhEzy';
 const SECRET_KEY = '7bUaGXeRMuk70cde73PUKxIcqACFbbWL';
 const DEV = false;
 
+// 获取答题APP简称（百万英雄为bw，冲顶大会为cd，芝士超人为zs）
 $type = !empty($argv['1'])?$argv['1']:'bw';
 
 $client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
@@ -21,7 +22,8 @@ $src_img = './screenshot.png';
 $src_croped = './crop_1.png';
 $src_small_img = './crop_small_1.png';
 
-system("adb shell screencap -p > screenshot.png");
+// 截图并保存到本地，此方法速度最快
+// system("adb shell screencap -p > screenshot.png");
 
 if(DEV){
 	$middle = microtime(TRUE);
@@ -60,13 +62,13 @@ imagedestroy($croped);
 $image = file_get_contents($src_croped);
 
 /**
-//3.使用固定的公式计算新的宽高
+//1.使用固定的公式计算新的宽高
 $x = $w/2;
 $y = $h/2;
-//4.生成目标图像资源
+//2.生成目标图像资源
 $small = imagecreatetruecolor($x,$y);
 
-//5.进行缩放
+//3.进行缩放
 imagecopyresampled($small,$source,0,0,0,0,$x,$y,$w,$h);
 
 // 保存
@@ -96,26 +98,16 @@ $tmp = [];
 // $mark = false;//问题是否有问号
 foreach ($titles as $k => $v) {
 	$tmp[] = $v['words'];
-	// if(strstr($v['words'], '?') !== false){
-	// 	$ans .= $v['words'];
-	// 	$ans = trim($ans,'?');
-	// 	// $mark = true;
-	// 	break;
-	// }else{
-	// 	$ans .= $v['words'];
-	// }
 }
-
+// 所有选项
 $select = array_slice($tmp,count($tmp)-3,3);
+// 问题内容
 $ans = implode('', array_slice($tmp,0,count($tmp)-3));
+// 剔除问题字符串左侧序号
 $ans = preg_replace('/^[1-9]\\d*|\\./u', '', $ans);
+// 剔除问题字符串？
 $ans = trim($ans,'?');
 echo '问题：',$ans,PHP_EOL;
-
-// 剔除字符串左侧序号
-// $ans = preg_replace('/^[1-9]\\d*|\\./u', '', $ans);
-// $ans = preg_replace('/^[1-9]\\d*\\./u', '', $ans);
-
 
 // 浏览器打开，不建议使用，如果前几条结果没有答案，那后面有正确答案的概率也很小
 // system('open -a "/Applications/Google Chrome.app" http://www.baidu.com/s?wd='.urlencode($ans));
@@ -127,8 +119,10 @@ if(DEV){
 	$after_baidu = microtime(TRUE);
 	echo 'Baidu接口用时：'.($after_baidu-$after_api).'秒',PHP_EOL;
 }
+// 百度知道结果集
 $posts = $document->find('.op_generalqa_answer_content');
 $result = array_slice($posts,0,3);
+// 百度搜索结果集（非百度知道）
 $posts = $document->find('.result');
 $result = array_merge($result,array_slice($posts,0,3));
 foreach(array_slice($result,0,3) as $post) {
@@ -142,17 +136,10 @@ foreach(array_slice($result,0,3) as $post) {
     echo $text,PHP_EOL,PHP_EOL;
 }
 
-
 $after_baidu = microtime(TRUE);
 echo PHP_EOL,PHP_EOL,'Baidu程序用时：'.($after_baidu-$start).'秒',PHP_EOL;
 
 $pmi = $a_count = $q_count = $qa_count = [];
-
-// $document = new Document('http://www.baidu.com/s?wd='.urlencode($ans), true);
-// $posts = $document->find('.nums');
-// foreach($posts as $post) {
-// 	$q_count = get_count($post->text());
-// }
 
 foreach ($select as $k => $v) {
 	echo $ans.' '.$v,PHP_EOL;
@@ -160,23 +147,24 @@ foreach ($select as $k => $v) {
 	$document = new Document('http://www.baidu.com/s?wd='.urlencode($ans.' '.$v), true);
 	$posts = $document->find('.nums');
 	foreach($posts as $post) {
+		// 每个问题+选项的搜索结果数量
 		$qa_count[$k] = get_count($post->text());
  	}
 
  	$document = new Document('http://www.baidu.com/s?wd='.urlencode($v), true);
 	$posts = $document->find('.nums');
 	foreach($posts as $post) {
+		// 每个选项的搜索结果数量
 		$a_count[$k] = get_count($post->text());
  	}
 }
 
 foreach ($select as $k => $v) {
-	$pmi[$k] = $qa_count[$k]/$a_count[$k];
+	$pmi[$k] = $qa_count[$k]/$a_count[$k];//精简的PMI算法
 	echo PHP_EOL,'问题',($k+1),': PMI=',$pmi[$k];
 }
 
 $key = array_search(max($pmi),$pmi);
-// echo '其中最大值',$key,PHP_EOL,PHP_EOL;
 if(max($pmi)>1){
 	unset($pmi[$key]);
 	$key = array_search(max($pmi),$pmi);
@@ -186,7 +174,6 @@ system('echo "\033[31m '.($key+1).' \033[0m"');
 
 $end = microtime(TRUE);
 echo PHP_EOL,PHP_EOL,PHP_EOL,'PMI程序用时：'.($end-$start).'秒';
-
 
 function get_count($text)
 {
