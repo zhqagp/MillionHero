@@ -1,9 +1,21 @@
 # 百万英雄、冲顶大会、芝士超人答题助手
 ----------------------------------------------------------------------------------------------
 
-
 ##Update
 >*  2018-01-13 : 实现百度搜索、PMI算法、以及搜索结果高亮显示
+
+## 整个程序运行完估计3-4秒左右，其中百度搜索只需要2-3秒，还可以有时间答题（---）
+
+## 使用教程
+
+1.安装ADB 驱动，可以到[这里下载](https://adb.clockworkmod.com/)<br />
+	安装 ADB 后，请在环境变量里将 adb 的安装路径保存到 PATH 变量里，确保 adb 命令可以被识别到
+Mac 可以使用 brew cask install android-platform-tools
+
+2.在hero.php里填写自己百度ocr的APP_ID/API_KEY/SECRET_KEY</br>
+	百度ocr：http://ai.baidu.com/tech/ocr/general
+
+3.连接手机，打开开发者调试模式<br>运行php hero.php {答题APP简称} （百万英雄为bw，冲顶大会为cd，芝士超人为zs）
 
 
 ## 注意： 优先使用Baidu搜索结果，PMI算法结果并不一定准确
@@ -29,19 +41,5 @@
 该公式的依据来自于维基百科: https://en.wikipedia.org/wiki/Pointwise_mutual_information
 
 ## 把问题区域裁剪出来后用百度的ocr识别出文本，然后调用百度搜索（可以同时打开浏览器,代码已经注释）
-
-## 整个程序运行完估计3-4秒左右，其中百度搜索只需要2-3秒，还可以有时间答题（---）
-
-## 使用教程
-
-
-1.安装ADB 驱动，可以到[这里下载](https://adb.clockworkmod.com/)<br />
-	安装 ADB 后，请在环境变量里将 adb 的安装路径保存到 PATH 变量里，确保 adb 命令可以被识别到
-Mac 可以使用 brew cask install android-platform-tools
-
-2.在hero.php里填写自己百度ocr的APP_ID/API_KEY/SECRET_KEY</br>
-	百度ocr：http://ai.baidu.com/tech/ocr/general
-
-3.连接手机，打开开发者调试模式<br>运行php hero.php {答题APP简称} （百万英雄为bw，冲顶大会为cd，芝士超人为zs）
 
 
