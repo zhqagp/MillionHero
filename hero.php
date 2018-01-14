@@ -80,7 +80,7 @@ if(DEV){
 	$after = microtime(TRUE);
 	echo '图片处理用时：'.($after-$middle).'秒',PHP_EOL;
 }
-$respon = $client->basicGeneral($image);
+$respon = $client->basicAccurate($image);
 
 if(DEV){
 	$after_api = microtime(TRUE);
@@ -170,7 +170,8 @@ if(max($pmi)>1){
 	$key = array_search(max($pmi),$pmi);
 }
 echo PHP_EOL,PHP_EOL,'答案应该为：';
-system('echo "\033[31m '.($key+1).' \033[0m"');
+
+echo "\033[31m ".($key+1)." \033[0m";
 
 $end = microtime(TRUE);
 echo PHP_EOL,PHP_EOL,PHP_EOL,'PMI程序用时：'.($end-$start).'秒';
