@@ -171,7 +171,7 @@ if(max($pmi)>1){
 }
 echo PHP_EOL,PHP_EOL,'答案应该为：';
 
-echo "\033[31m ".($key+1)." \033[0m";
+echo red($key+1);
 
 $end = microtime(TRUE);
 echo PHP_EOL,PHP_EOL,PHP_EOL,'PMI程序用时：'.($end-$start).'秒';
